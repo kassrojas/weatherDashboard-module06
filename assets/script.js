@@ -1,3 +1,6 @@
+var cityInput = document.querySelector('#cityInput');
+var searchButton = document.querySelector('#searchButton');
+
 requestUrl = 'api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}';
 
 fetch(requestUrl)
