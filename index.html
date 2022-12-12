@@ -14,14 +14,15 @@
     <h1 class="p-3 m-3">
         Weather Dashboard
     </h1>
-    <form>
-        <div class="mb-3">
-          <label for="searchCity" class="searchLabel p-2 m-3">Search City Name</label>
-          <input class="form-control p-2 m-3" id="cityInput" name="cityInput" placeholder="Search City">
-        </div>
-        <button type="search" class="btn btn-primary p-2 m-3" id="searchButton">Search</button>
-      </form>
 </header>
+<nav class="navbar bg-light">
+    <div class="container-fluid">
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" id="cityInput" type="search" placeholder="Search a City" aria-label="Search">
+        <button class="btn btn-outline-success" id="searchButton" type="submit">Search</button>
+      </form>
+    </div>
+</nav>
 
     
     
