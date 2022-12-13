@@ -7,7 +7,7 @@ var cityName = 'new york';
 // geocodeUrl gives back data on lat and lon
 geocodeUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=0cf0c8196ec606a9f30889804aba9ea1';
 
-var fetchCoordinates = function (){
+function getCoordinates (event){
     
     fetch(geocodeUrl)
         .then(function (response){
@@ -44,14 +44,17 @@ searchButton.addEventListener('click', handleSearch);
 //     latUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon +'&appid=0cf0c8196ec606a9f30889804aba9ea1';
 // };
 
-
-// fetch(latUrl)
-//     .then(function(response){
-//         return response.json();
-//     })
-//     .then(function (data){
-//         console.log(data);
-//     })
-//     .catch(function (error){
-//         console.log(error);
-//     })
+function getWeather (){
+    
+    fetch(latUrl)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function (data){
+            console.log(data);
+        })
+        .catch(function (error){
+            console.log(error);
+        })
+    
+}; 
