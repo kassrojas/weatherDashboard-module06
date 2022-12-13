@@ -45,10 +45,15 @@ function getWeather (lat, lon){
 // city name : city.name 
 //     the date: list[0].dt_txt
 //     icon representation of weather conditions: list[0].weather[0].icon
-//     temperature: list[0].main.temp
+//     temperature: list[0].main.temp || get back in Kelvin
 //     humidity: list[0].main.humidity
 //     wind speed: list[0].wind.speed
+// 
 
+// function temperatureConverter(valNum) {
+//     valNum = parseFloat(valNum);
+//     document.getElementById("outputCelsius").innerHTML = ((valNum-273.15)*1.8)+32;
+//   }
 
 
 
