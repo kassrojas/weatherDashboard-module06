@@ -1,9 +1,25 @@
 var cityInput = document.querySelector('#cityInput');
 var searchButton = document.querySelector('#searchButton');
+var resultsEl = document.querySelector('#results');
 
 function displayData (results){
     for (var result of results){
         console.log(results);
+
+        var cardEl = document.createElement('div');
+        cardEl.className = 'card';
+        
+        var cardBody = document.createElement('div');
+        cardBody.className = 'card-body';
+        
+        var cardTitleEl = document.createElement('h5');
+        cardTitleEl.className = 'card-title';
+        cardTitleEl.textContent = results.city.name;
+        
+        var cardTextEl = document.createElement('p');
+        cardText.className = 'card-text';
+        cardText.textContent = results.list[0].main.temp, results.list[0].main.humidity, results.list[0].wind.speed; 
+
     };
 };
 
@@ -42,13 +58,13 @@ function getWeather (lat, lon){
         return response.json();
     })
     .then(function (data){
-        console.log(weatherResults);
         // console.log(data.city.name);
         // console.log(data.list[0].dt_txt);
         // console.log(data.list[0].weather[0].icon);
         // console.log(data.list[0].main.temp);
         // console.log(data.list[0].main.humidity);
         // console.log(data.list[0].wind.speed);
+        console.log(weatherResults);
         var weatherResults = [
             data.city.name, 
             data.list[0].dt_txt,
