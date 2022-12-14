@@ -2,25 +2,47 @@ var cityInput = document.querySelector('#cityInput');
 var searchButton = document.querySelector('#searchButton');
 var resultsEl = document.querySelector('#results');
 
-function displayData (results){
-    for (var result of results){
-        console.log(results);
+function displayResults (results){
+    // console.log(results);
+    // var cityName;
+    // var dayTime;
+    // var icon;
+    // var temp;
+    // var humid;
+    // var wind;
+    
+    for (var i = 0; i < results.list.length ; i++) {
+        // console.log(i);
+        cityName = results.city.name;
+        dayTime = results.list[i].dt_txt;
+        icon = results.list[i].weather[0].icon;
+        temp = results.list[i].main.temp;
+        humid = results.list[i].main.humidity;
+        wind = results.list[i].wind.speed;
+        console.log(cityName, dayTime, icon, temp, humid, wind);
+    }
+    // 
+    //for (var result of results){
 
-        var cardEl = document.createElement('div');
-        cardEl.className = 'card';
+    //     var cardEl = document.createElement('div');
+    //     cardEl.className = 'card';
         
-        var cardBody = document.createElement('div');
-        cardBody.className = 'card-body';
+    //     var cardBody = document.createElement('div');
+    //     cardBody.className = 'card-body';
         
-        var cardTitleEl = document.createElement('h5');
-        cardTitleEl.className = 'card-title';
-        cardTitleEl.textContent = results.city.name;
-        
-        var cardTextEl = document.createElement('p');
-        cardText.className = 'card-text';
-        cardText.textContent = results.list[0].main.temp, results.list[0].main.humidity, results.list[0].wind.speed; 
+    //     var cardTitleEl = document.createElement('h5');
+    //     cardTitleEl.className = 'card-title';
+    //     cardTitleEl.textContent = results.city.name;
 
-    };
+    //     var cardImgEl = document.createElement('img');
+    //     cardImgEl.className = 'card-img';
+    //     cardImgEl.src = data.list[0].weather[0].icon;
+        
+    //     var cardTextEl = document.createElement('p');
+    //     cardText.className = 'card-text';
+    //     cardText.textContent = results.list[0].main.temp, results.list[0].main.humidity, results.list[0].wind.speed; 
+
+    // };
 };
 
 
@@ -64,36 +86,28 @@ function getWeather (lat, lon){
         // console.log(data.list[0].main.temp);
         // console.log(data.list[0].main.humidity);
         // console.log(data.list[0].wind.speed);
-        console.log(weatherResults);
-        var weatherResults = [
-            data.city.name, 
-            data.list[0].dt_txt,
-            data.list[0].weather[0].icon,
-            data.list[0].main.temp,
-            data.list[0].main.humidity,
-            data.list[0].wind.speed,
-        ];
-        displayData(weatherResults);
+        // console.log(weatherResults);
+        // var data = {
+        //     cityName: city.name, 
+        //     dayTime: list[0].dt_txt,
+        //     icon: list[0].weather[0].icon,
+        //     temp: list[0].main.temp,
+        //     humid: list[0].main.humidity,
+        //     wind: list[0].wind.speed,
+        // };
+        console.log(data);
+        displayResults(data);
     })
     .catch(function (error){
         console.log(error);
     })
     
 }; 
-//city name : city.name 
-//the date: list[0].dt_txt
-//icon representation of weather conditions: list[0].weather[0].icon
-//temperature: list[0].main.temp || get back in Kelvin
-//humidity: list[0].main.humidity
-//wind speed: list[0].wind.speed
-
 
 
 var handleSearch = function (event){
     event.preventDefault();
-    
     var city = cityInput.value.trim(); 
-
     getCoordinates(city);
 };
 
