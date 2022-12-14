@@ -4,53 +4,49 @@ var resultsEl = document.querySelector('#results');
 
 function displayResults (results){
     // console.log(results);
-    // var cityName;
-    // var dayTime;
-    // var icon;
-    // var temp;
-    // var humid;
-    // var wind;
+    resultsEl.innerHTML = null;
     
-    for (var i = 0; i < results.list.length ; i++) {
+    for (var i = 0; i < results.list.length ; i+= 8) {
         // console.log(i);
-        cityName = results.city.name;
-        dayTime = results.list[i].dt_txt;
-        icon = results.list[i].weather[0].icon;
-        temp = results.list[i].main.temp;
-        humid = results.list[i].main.humidity;
-        wind = results.list[i].wind.speed;
+        var cityName = results.city.name;
+        var dayTime = results.list[i].dt_txt;
+        var icon = results.list[i].weather[0].icon;
+        var temp = results.list[i].main.temp;
+        var humid = results.list[i].main.humidity;
+        var wind = results.list[i].wind.speed;
         console.log(cityName, dayTime, icon, temp, humid, wind);
+        
+        var cardEl = document.createElement('div');
+        cardEl.className = 'card p-3';
+        
+        var cardBody = document.createElement('div');
+        cardBody.className = 'card-body';
+        
+        var cardTitleEl = document.createElement('h5');
+        cardTitleEl.className = 'card-title';
+        cardTitleEl.textContent = cityName;
+    
+        // var cardIcon = "http://openweathermap.org/img/wn/" + icon + ".png";
+        // cardIcon.setAttribute('src', cardIcon);
+        
+        var cardTextTemp = document.createElement('p');
+        cardTextTemp.className = 'card-text';
+        cardTextTemp.textContent = 'temp' + temp; 
+
+        var cardTextHumid = document.createElement('p');
+        cardTextHumid.className = 'card-text';
+        cardTextHumid.textContent = 'humidity' + humid;
+
+        var cardTextWind = document.createElement('p');
+        cardTextWind.className = 'card-text';
+        cardTextWind.textContent = 'wind' + wind;
+
+        resultsEl.appendChild(cardEl);
+        cardEl.appendChild(cardBody);
+        cardBody.append(cardTitleEl, cardTextTemp, cardTextHumid, cardTextWind);
     }
-    // 
-    //for (var result of results){
-
-    //     var cardEl = document.createElement('div');
-    //     cardEl.className = 'card';
-        
-    //     var cardBody = document.createElement('div');
-    //     cardBody.className = 'card-body';
-        
-    //     var cardTitleEl = document.createElement('h5');
-    //     cardTitleEl.className = 'card-title';
-    //     cardTitleEl.textContent = results.city.name;
-
-    //     var cardImgEl = document.createElement('img');
-    //     cardImgEl.className = 'card-img';
-    //     cardImgEl.src = data.list[0].weather[0].icon;
-        
-    //     var cardTextEl = document.createElement('p');
-    //     cardText.className = 'card-text';
-    //     cardText.textContent = results.list[0].main.temp, results.list[0].main.humidity, results.list[0].wind.speed; 
-
-    // };
+   
 };
-
-
-
-
-
-
-
 
 
 // geocodeUrl gives back data on lat and lon
@@ -80,22 +76,7 @@ function getWeather (lat, lon){
         return response.json();
     })
     .then(function (data){
-        // console.log(data.city.name);
-        // console.log(data.list[0].dt_txt);
-        // console.log(data.list[0].weather[0].icon);
-        // console.log(data.list[0].main.temp);
-        // console.log(data.list[0].main.humidity);
-        // console.log(data.list[0].wind.speed);
-        // console.log(weatherResults);
-        // var data = {
-        //     cityName: city.name, 
-        //     dayTime: list[0].dt_txt,
-        //     icon: list[0].weather[0].icon,
-        //     temp: list[0].main.temp,
-        //     humid: list[0].main.humidity,
-        //     wind: list[0].wind.speed,
-        // };
-        console.log(data);
+        // console.log(data); working!
         displayResults(data);
     })
     .catch(function (error){
@@ -109,6 +90,7 @@ var handleSearch = function (event){
     event.preventDefault();
     var city = cityInput.value.trim(); 
     getCoordinates(city);
+    localStorage.setItem('city', city);
 };
 
 searchButton.addEventListener('click', handleSearch);
