@@ -7,7 +7,7 @@
 
 ## Description
 
-What it does
+The Weather Dashboard allows the user to input a city name and get back the current weather conditions and a 5 day forecast. City name, date, time, temperature, humidity, wind speed, and an icon are rendered on the page from the API calls. Searches are saved locally and can be revisted to present the user with the weather conditions again. This application uses multiple API's provided by the Open Weather Map. The application is Javascript driven and bootstrap was used to style the webpage.
 
 ## Visuals
 
@@ -21,32 +21,4 @@ Screenshots of working webpage
 
 ## Credits
 
-
-
-
-<!-- Acceptance Criteria
-AS A traveler
-I WANT to see the weather outlook for multiple cities
-SO THAT I can plan a trip accordingly
-GIVEN a weather dashboard with form inputs
-
-WHEN I search for a city
-THEN I am presented with current and future conditions for that city [YES]
-
-[NEED] that city is added to the search history
-
-
-WHEN I view current weather conditions for that city
-THEN I am presented with the [YES]
-    city name : city.name 
-    the date: list[0].dt_txt
-    icon representation of weather conditions: list[0].weather[0].icon
-    temperature: list[0].main.temp
-    humidity: list[0].main.humidity
-    wind speed: list[0].wind.speed
-
-WHEN I view future weather conditions for that city
-THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity [YES]
-
-WHEN I click on a city in the search history
-THEN I am again presented with current and future conditions for that city -->
+https://openweathermap.org/

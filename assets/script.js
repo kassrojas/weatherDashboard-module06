@@ -171,8 +171,8 @@ var handleSearch = function (event){
     event.preventDefault();
     
     var city = cityInput.value.trim(); 
-
     getCoordinates(city);
+    
     localStorage.setItem('city', city);
     renderLocal();
 };
