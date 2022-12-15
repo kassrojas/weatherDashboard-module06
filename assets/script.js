@@ -1,6 +1,7 @@
 var cityInput = document.querySelector('#cityInput');
 var searchButton = document.querySelector('#searchButton');
 var resultsEl = document.querySelector('#results');
+var lastSearched = document.querySelector('#renderLocal');
 
 function displayFiveDay (results){
     // console.log(results);
@@ -50,9 +51,8 @@ function displayFiveDay (results){
         cardEl.appendChild(cardBody);
         cardBody.append(cardTitleEl, cardDate, cardIconEl, cardTextTemp, cardTextHumid, cardTextWind);
     }
-   
+//    displayToday();
 };
-
 
 function displayToday (results){
     resultsEl.innerHTML = null;
@@ -100,6 +100,8 @@ function displayToday (results){
         cardBody.append(cardTitleEl, cardDate, cardIconEl, cardTextTemp, cardTextHumid, cardTextWind);
     
 };
+
+
 
 // geocodeUrl gives back data on lat and lon
 function getCoordinates (cityName){
@@ -151,11 +153,19 @@ function getWeather (lat, lon){
 }; 
 
 
+function renderLocal (){
+    
+    lastSearched.textContent = localStorage.getItem('city');
+    
+};
+
 var handleSearch = function (event){
     event.preventDefault();
     var city = cityInput.value.trim(); 
     getCoordinates(city);
+    
     localStorage.setItem('city', city);
+    renderLocal();
 };
 
 searchButton.addEventListener('click', handleSearch);
