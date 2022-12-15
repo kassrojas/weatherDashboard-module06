@@ -1,7 +1,9 @@
 var cityInput = document.querySelector('#cityInput');
 var searchButton = document.querySelector('#searchButton');
-var resultsEl = document.querySelector('#results');
+var resultsEl = document.querySelector('#fiveDayResults');
+var todayResults = document.querySelector('#todayResults');
 var lastSearched = document.querySelector('#renderLocal');
+var apiKey = '0cf0c8196ec606a9f30889804aba9ea1';
 
 function displayFiveDay (results){
     // console.log(results);
@@ -33,19 +35,19 @@ function displayFiveDay (results){
         
         var cardTextTemp = document.createElement('p');
         cardTextTemp.className = 'card-text';
-        cardTextTemp.textContent = 'temp' + temp; 
+        cardTextTemp.textContent = 'TEMPERATURE: ' + temp + '\u00B0 F'; 
 
         var cardTextHumid = document.createElement('p');
         cardTextHumid.className = 'card-text';
-        cardTextHumid.textContent = 'humidity' + humid;
+        cardTextHumid.textContent = 'HUMIDITY: ' + humid;
 
         var cardTextWind = document.createElement('p');
         cardTextWind.className = 'card-text';
-        cardTextWind.textContent = 'wind' + wind;
+        cardTextWind.textContent = 'WIND SPEED: ' + wind + ' MPH';
         
         var cardDate = document.createElement('p');
         cardDate.className = 'card-text';
-        cardDate.textContent = 'time' + dayTime;
+        cardDate.textContent = 'TIME: ' + dayTime;
 
         resultsEl.appendChild(cardEl);
         cardEl.appendChild(cardBody);
@@ -55,10 +57,12 @@ function displayFiveDay (results){
 };
 
 function displayToday (results){
-    resultsEl.innerHTML = null;
+    todayResults.innerHTML = null;
+    
+        var dayTime = results.dt;
+        var newDayTime = new Date(dayTime * 1000);
     
         var cityName = results.name;
-        var dayTime = results.dt;
         var icon = results.weather[0].icon;
         var temp = results.main.temp;
         var humid = results.main.humidity;
@@ -81,21 +85,21 @@ function displayToday (results){
         
         var cardTextTemp = document.createElement('p');
         cardTextTemp.className = 'card-text';
-        cardTextTemp.textContent = 'temp' + temp; 
+        cardTextTemp.textContent = 'TEMPERATURE: ' + temp + '\u00B0 F'; 
 
         var cardTextHumid = document.createElement('p');
         cardTextHumid.className = 'card-text';
-        cardTextHumid.textContent = 'humidity' + humid;
+        cardTextHumid.textContent = 'HUMIDITY: ' + humid;
 
         var cardTextWind = document.createElement('p');
         cardTextWind.className = 'card-text';
-        cardTextWind.textContent = 'wind' + wind;
+        cardTextWind.textContent = 'WIND SPEED: ' + wind + ' MPH';
         
         var cardDate = document.createElement('p');
         cardDate.className = 'card-text';
-        cardDate.textContent = 'time' + dayTime;
+        cardDate.textContent = 'TIME: ' + newDayTime;
 
-        resultsEl.appendChild(cardEl);
+        todayResults.appendChild(cardEl);
         cardEl.appendChild(cardBody);
         cardBody.append(cardTitleEl, cardDate, cardIconEl, cardTextTemp, cardTextHumid, cardTextWind);
     
@@ -105,7 +109,7 @@ function displayToday (results){
 
 // geocodeUrl gives back data on lat and lon
 function getCoordinates (cityName){
-    var geocodeUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=0cf0c8196ec606a9f30889804aba9ea1';
+    var geocodeUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + apiKey;
 
     
     fetch(geocodeUrl)
@@ -123,8 +127,8 @@ function getCoordinates (cityName){
 
 // transfer coordinates data into getWeather
 function getWeather (lat, lon){
-    fiveDayUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=0cf0c8196ec606a9f30889804aba9ea1' + '&units=imperial';
-    todayUrl = 'https://api.openweathermap.org/data/2.5/weather?lat='+ lat + '&lon=' + lon + '&appid=0cf0c8196ec606a9f30889804aba9ea1' + '&units=imperial';
+    fiveDayUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=' + apiKey + '&units=imperial';
+    todayUrl = 'https://api.openweathermap.org/data/2.5/weather?lat='+ lat + '&lon=' + lon + '&appid=' + apiKey + '&units=imperial';
     
     fetch(fiveDayUrl)
     .then(function(response){
@@ -154,16 +158,21 @@ function getWeather (lat, lon){
 
 
 function renderLocal (){
-    
+    // for (var i = 0; i < city.length; i++){
+
     lastSearched.textContent = localStorage.getItem('city');
+    // }
+
+    // FOR EVERY INPUT, SAVE TO LOCAL STORAGE AND GET ITEM
     
 };
 
 var handleSearch = function (event){
     event.preventDefault();
-    var city = cityInput.value.trim(); 
-    getCoordinates(city);
     
+    var city = cityInput.value.trim(); 
+
+    getCoordinates(city);
     localStorage.setItem('city', city);
     renderLocal();
 };
