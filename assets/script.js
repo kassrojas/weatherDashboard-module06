@@ -26,8 +26,9 @@ function displayResults (results){
         cardTitleEl.className = 'card-title';
         cardTitleEl.textContent = cityName;
     
-        // var cardIcon = "http://openweathermap.org/img/wn/" + icon + ".png";
-        // cardIcon.setAttribute('src', cardIcon);
+        var cardIconEl = document.createElement('img');
+        var cardIcon = "https://openweathermap.org/img/wn/" + icon + ".png";
+        cardIconEl.setAttribute('src', cardIcon);
         
         var cardTextTemp = document.createElement('p');
         cardTextTemp.className = 'card-text';
@@ -43,7 +44,7 @@ function displayResults (results){
 
         resultsEl.appendChild(cardEl);
         cardEl.appendChild(cardBody);
-        cardBody.append(cardTitleEl, cardTextTemp, cardTextHumid, cardTextWind);
+        cardBody.append(cardTitleEl, cardIconEl, cardTextTemp, cardTextHumid, cardTextWind);
     }
    
 };
