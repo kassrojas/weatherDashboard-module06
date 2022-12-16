@@ -20,7 +20,7 @@ function displayFiveDay (results){
         console.log(cityName, dayTime, icon, temp, humid, wind);
         
         var cardEl = document.createElement('div');
-        cardEl.className = 'card p-3';
+        cardEl.className = 'card p-3 d-inline-flex';
         
         var cardBody = document.createElement('div');
         cardBody.className = 'card-body';
@@ -69,7 +69,7 @@ function displayToday (results){
         console.log(cityName, dayTime, icon, temp, humid, wind);
 
         var cardEl = document.createElement('div');
-        cardEl.className = 'card p-3';
+        cardEl.className = 'card p-3 d-inline-flex';
         
         var cardBody = document.createElement('div');
         cardBody.className = 'card-body';
@@ -166,6 +166,14 @@ var renderLocal = function () {
         searchHistory.append(lastCityBtn);
     }
 
+//     var clearSearchBtn = document.createElement('button');
+//     clearSearchBtn.textContent = 'Clear All';
+//     searchHistory.append(clearSearchBtn);
+    
+//     clearSearchBtn.onclick = function (event){
+//         event.preventDefault();
+//         clearSearchBtn = localStorage.clear();
+//     };
 };
 
 searchButton.onclick = function (event){
