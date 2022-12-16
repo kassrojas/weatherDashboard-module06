@@ -6,21 +6,21 @@ var searchHistory = document.querySelector('#searchHistory');
 var apiKey = '0cf0c8196ec606a9f30889804aba9ea1';
 
 function displayFiveDay (results){
-    // console.log(results);
+    
     resultsEl.innerHTML = null;
     
     for (var i = 0; i < results.list.length ; i+= 8) {
-        // console.log(i);
+       
         var cityName = results.city.name;
         var dayTime = results.list[i].dt_txt;
         var icon = results.list[i].weather[0].icon;
         var temp = results.list[i].main.temp;
         var humid = results.list[i].main.humidity;
         var wind = results.list[i].wind.speed;
-        console.log(cityName, dayTime, icon, temp, humid, wind);
+        
         
         var cardEl = document.createElement('div');
-        cardEl.className = 'card p-3 d-inline-flex';
+        cardEl.className = 'card p-3 m-2 col bg-dark text-white';
         
         var cardBody = document.createElement('div');
         cardBody.className = 'card-body';
@@ -66,10 +66,9 @@ function displayToday (results){
         var temp = results.main.temp;
         var humid = results.main.humidity;
         var wind = results.wind.speed;
-        console.log(cityName, dayTime, icon, temp, humid, wind);
 
         var cardEl = document.createElement('div');
-        cardEl.className = 'card p-3 d-inline-flex';
+        cardEl.className = 'card p-3 m-2 bg-dark text-white';
         
         var cardBody = document.createElement('div');
         cardBody.className = 'card-body';
@@ -116,7 +115,6 @@ function getCoordinates (cityName){
             return response.json();
         })
         .then(function (data){
-            console.log(data[0].lat, data[0].lon);
             getWeather(data[0].lat, data[0].lon);
         })
         .catch(function (error){
@@ -134,7 +132,6 @@ function getWeather (lat, lon){
         return response.json();
     })
     .then(function (data){
-        console.log(data); 
         displayFiveDay(data);
     })
     .catch(function (error){
@@ -146,7 +143,6 @@ function getWeather (lat, lon){
         return response.json();
     })
     .then(function (data){
-        console.log(data); 
         displayToday(data);
     })
     .catch(function (error){
@@ -161,19 +157,14 @@ var renderLocal = function () {
         var key = localStorage.key(i);
 
         var lastCityBtn = document.createElement('button');
-        lastCityBtn.className = 'btn btn-outline-dark'
+        lastCityBtn.className = 'btn btn-light mx-4 my-1 col-auto';
         lastCityBtn.textContent = `${localStorage.getItem(key)}`;
-        searchHistory.append(lastCityBtn);
+        searchHistory.appendChild(lastCityBtn);
     }
+};
 
-//     var clearSearchBtn = document.createElement('button');
-//     clearSearchBtn.textContent = 'Clear All';
-//     searchHistory.append(clearSearchBtn);
-    
-//     clearSearchBtn.onclick = function (event){
-//         event.preventDefault();
-//         clearSearchBtn = localStorage.clear();
-//     };
+function clearHistory(){
+    searchHistory.innerHTML = '';
 };
 
 searchButton.onclick = function (event){
