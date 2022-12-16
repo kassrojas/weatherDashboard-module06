@@ -2,7 +2,7 @@ var cityInput = document.querySelector('#cityInput');
 var searchButton = document.querySelector('#searchButton');
 var resultsEl = document.querySelector('#fiveDayResults');
 var todayResults = document.querySelector('#todayResults');
-var lastSearched = document.querySelector('#renderLocal');
+var searchHistory = document.querySelector('#searchHistory');
 var apiKey = '0cf0c8196ec606a9f30889804aba9ea1';
 
 function displayFiveDay (results){
@@ -39,7 +39,7 @@ function displayFiveDay (results){
 
         var cardTextHumid = document.createElement('p');
         cardTextHumid.className = 'card-text';
-        cardTextHumid.textContent = 'HUMIDITY: ' + humid;
+        cardTextHumid.textContent = 'HUMIDITY: ' + humid + '%';
 
         var cardTextWind = document.createElement('p');
         cardTextWind.className = 'card-text';
@@ -53,7 +53,6 @@ function displayFiveDay (results){
         cardEl.appendChild(cardBody);
         cardBody.append(cardTitleEl, cardDate, cardIconEl, cardTextTemp, cardTextHumid, cardTextWind);
     }
-//    displayToday();
 };
 
 function displayToday (results){
@@ -89,7 +88,7 @@ function displayToday (results){
 
         var cardTextHumid = document.createElement('p');
         cardTextHumid.className = 'card-text';
-        cardTextHumid.textContent = 'HUMIDITY: ' + humid;
+        cardTextHumid.textContent = 'HUMIDITY: ' + humid + '%';
 
         var cardTextWind = document.createElement('p');
         cardTextWind.className = 'card-text';
@@ -156,18 +155,20 @@ function getWeather (lat, lon){
     
 }; 
 
-
-function renderLocal (){
-    // for (var i = 0; i < city.length; i++){
-
-    lastSearched.textContent = localStorage.getItem('city');
-    // }
-
-    // FOR EVERY INPUT, SAVE TO LOCAL STORAGE AND GET ITEM
+var renderLocal = function () {
     
+    for (var i = 0; i < localStorage.length; i++){
+        var key = localStorage.key(i);
+
+        var lastCityBtn = document.createElement('button');
+        lastCityBtn.className = 'btn btn-outline-dark'
+        lastCityBtn.textContent = `${localStorage.getItem(key)}`;
+        searchHistory.append(lastCityBtn);
+    }
+
 };
 
-var handleSearch = function (event){
+searchButton.onclick = function (event){
     event.preventDefault();
     
     var city = cityInput.value.trim(); 
@@ -177,4 +178,9 @@ var handleSearch = function (event){
     renderLocal();
 };
 
-searchButton.addEventListener('click', handleSearch);
+searchHistory.onclick = function(event){
+    event.preventDefault();
+    if (event.target.matches('button')){
+        getCoordinates(event.target.textContent);
+    }
+};
