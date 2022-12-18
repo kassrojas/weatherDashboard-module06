@@ -107,7 +107,7 @@ function displayToday (results){
 
 // geocodeUrl gives back data on lat and lon
 function getCoordinates (cityName){
-    var geocodeUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + apiKey;
+    var geocodeUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&limit=1&appid=' + apiKey;
 
     
     fetch(geocodeUrl)
