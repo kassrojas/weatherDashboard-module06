@@ -20,7 +20,7 @@ function displayFiveDay (results){
         
         
         var cardEl = document.createElement('div');
-        cardEl.className = 'card p-3 m-2 col bg-dark text-white';
+        cardEl.className = 'card p-3 m-2 col-12 col-md bg-dark text-white';
         
         var cardBody = document.createElement('div');
         cardBody.className = 'card-body';
@@ -157,7 +157,7 @@ var renderLocal = function () {
         var key = localStorage.key(i);
 
         var lastCityBtn = document.createElement('button');
-        lastCityBtn.className = 'btn btn-light mx-4 my-1 col-auto';
+        lastCityBtn.className = 'btn btn-light mx-4 my-1 col-8 col-md';
         lastCityBtn.textContent = `${localStorage.getItem(key)}`;
         searchHistory.appendChild(lastCityBtn);
     }
@@ -165,6 +165,7 @@ var renderLocal = function () {
 
 function clearHistory(){
     searchHistory.innerHTML = '';
+    window.location.reload();
 };
 
 searchButton.onclick = function (event){
