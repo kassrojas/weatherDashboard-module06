@@ -11,25 +11,25 @@
   <link rel="stylesheet" href="./assets/style.css" />
 </head>
 
-<body class="bg-secondary text-light">
+<body class="dashBg text-dark">
   <header>
     <h1 class="p-3 m-3"> Weather Dashboard </h1>
   </header>
   
   <div class="row">
-    <div class="col-4 text-center">
+    <div class="col-lg-2 col-md-auto col-sm-auto text-center">
       
       <form role="search">
-        <input class="form-control p-2 m-3 col-6 col-md" id="cityInput" name="cityInput" placeholder="Search a City">
-        <button class="btn btn-outline-light m-3 p-2 col-md" id="searchButton" type="submit">Search</button>
+        <input class="form-control p-2 m-3" id="cityInput" name="cityInput" placeholder="Search a City">
+        <button class="btn btn-outline-light m-3 p-2" id="searchButton" type="submit">Search</button>
       </form>
       <div id="searchHistory" class="m-3 p-2"></div>
-      <button class="col-auto btn btn-danger m-3 p-2" onclick="clearHistory()">Reset</button>
+      <button class="col-auto btn btn-success m-3 p-2" onclick="clearHistory()">Reset</button>
     
     </div>
-    <section class="col-8 col-md-auto">
+    <section class="col-lg-8 col-md-auto col-sm-auto m-3">
   
-      <div class="col-12" id="todayResults"></div>
+      <div id="todayResults"></div>
   
       <div class="row p-3 m-2" id="fiveDayResults">
        

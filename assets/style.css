@@ -1,0 +1,20 @@
+.mainCard {
+    background-color: rgb(2, 128, 144);
+}
+
+.fiveDayCards {
+    background-color: rgb(0, 168, 150);
+}
+
+.historyButton {
+    background-color: rgb(70, 143, 175);
+    color: white;
+}
+
+#searchButton {
+    background-color: rgb(5, 102, 141);
+}
+
+.dashBg {
+    background-color: rgba(240, 243, 189, 0.6);
+}
